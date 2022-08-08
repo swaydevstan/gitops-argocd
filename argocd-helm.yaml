@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-alpine-helm
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      valueFiles:
+      - values.yml
+      - value-staging.yml
+      - values-prod.yml
+    path: helm
+    repoURL: https://github.com/swaydevstan/gitops-argocd 
+    targetRevision: HEAD
+  # Sync policy
+  syncPolicy: {}
