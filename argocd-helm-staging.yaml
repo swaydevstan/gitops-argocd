@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-staging
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      valueFiles:
+      - value-staging.yml
+    path: helm
+    repoURL: https://github.com/swaydevstan/gitops-argocd 
+    targetRevision: HEAD
+  # Sync policy
+  syncPolicy: {}

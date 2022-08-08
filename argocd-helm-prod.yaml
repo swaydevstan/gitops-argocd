@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx-alpine-helm
+  name: nginx-prod
   namespace: argocd
 spec:
   destination:
@@ -11,8 +11,6 @@ spec:
   source:
     helm:
       valueFiles:
-      - values.yml
-      - value-staging.yml
       - values-prod.yml
     path: helm
     repoURL: https://github.com/swaydevstan/gitops-argocd 
